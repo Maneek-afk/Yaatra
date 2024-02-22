@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -5,7 +6,9 @@ class BookingPage extends StatefulWidget {
   final String imageAsset;
   final String cityName;
 
-  const BookingPage({
+  
+
+   BookingPage({
     Key? key,
     required this.imageAsset,
     required this.cityName,
@@ -16,18 +19,33 @@ class BookingPage extends StatefulWidget {
 }
 
 class _BookingPageState extends State<BookingPage> {
-  final TextEditingController _cityNameController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
+  
+  final TextEditingController fromController = TextEditingController();
+  final TextEditingController toController = TextEditingController();
+  final TextEditingController departureController = TextEditingController();
+  final TextEditingController passengerController = TextEditingController();
+  
+  Future bookingDetail(String from,String to,String departure, int passenger) async {
+    await FirebaseFirestore.instance.collection('Bookings').add({
+      'from': from,
+      'to': to,
+      'departure': departure,
+      'passenger': passenger
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    _cityNameController.text = widget.cityName;
+    toController.text = widget.cityName;
   }
 
   @override
   void dispose() {
-    _cityNameController.dispose();
+    fromController.dispose();
+    toController.dispose();
+    departureController.dispose();
+    passengerController.dispose();
     super.dispose();
   }
 
@@ -49,7 +67,8 @@ class _BookingPageState extends State<BookingPage> {
               SizedBox(
                 height: 50,
                 child: TextFormField(
-                  initialValue: 'Kathmandu',
+                 
+                  initialValue: 'Kathmandu',  // Provide an initial value
                   decoration: const InputDecoration(
                     labelText: 'From',
                     border: OutlineInputBorder(),
@@ -59,6 +78,7 @@ class _BookingPageState extends State<BookingPage> {
                   ),
                 ),
               ),
+
         
               const SizedBox(height: 30),
         
@@ -66,7 +86,7 @@ class _BookingPageState extends State<BookingPage> {
               SizedBox(
                 height: 50,
                 child: TextFormField(
-                  controller: _cityNameController,
+                  controller: toController,
                   decoration: const InputDecoration(
                     labelText: 'To',
                     border: OutlineInputBorder(),
@@ -82,7 +102,7 @@ class _BookingPageState extends State<BookingPage> {
               SizedBox(
                 height: 50,
                 child: TextFormField(
-                  controller: _dateController,
+                  controller: departureController,
                   decoration: const InputDecoration(
                     labelText: 'Departure',
                     border: OutlineInputBorder(),
@@ -103,6 +123,7 @@ class _BookingPageState extends State<BookingPage> {
                SizedBox(
                 height: 65,
                 child: TextFormField(
+                  controller: passengerController,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   maxLength: 1,
@@ -118,7 +139,14 @@ class _BookingPageState extends State<BookingPage> {
         
                ElevatedButton(
         onPressed: () {
-          // Add your search functionality here
+          Navigator.pushNamed(context, 'notification');
+          bookingDetail(
+            widget.cityName, 
+            toController.text.trim(), 
+            departureController.text.trim(), 
+            int.parse(passengerController.text.trim())
+          );
+
         },
         child: const Text('Book'),
             ),
@@ -138,7 +166,7 @@ class _BookingPageState extends State<BookingPage> {
       );
       if (_picked !=null){
         setState(() {
-          _dateController.text=_picked.toString().split(" ")[0];
+          departureController.text=_picked.toString().split(" ")[0];
         });
       }
   }
