@@ -32,6 +32,11 @@ class LoginPage extends StatelessWidget {
       'password': password,
     });
   }
+ 
+
+
+
+// Now, the 'name' variable contains the desired username
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:bus/classes/Colors.dart';
 import 'package:bus/pages/AboutusPage.dart';
 import 'package:bus/pages/HelpPage.dart';
 import 'package:bus/pages/Home_page.dart';
-import 'package:bus/pages/LoginPage.dart';
+import 'package:bus/pages/SignUp.dart';
 import 'package:bus/pages/NotifiPage.dart';
 import 'package:bus/pages/SearchResultPage.dart';
 import 'package:bus/pages/Signinpage.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         'home':(context)=>  const HomePage(),
         'search':(context)=>  const SearchResultsPage(),
         'help':(context)=>  const HelpPage(),
-        'notification':(context)=>  const NotifiPage(),
+        'notification':(context)=>   NotifiPage(),
         'sigin':(context)=>   SigninPage(),
         'login':(context)=>   LoginPage(),
       },

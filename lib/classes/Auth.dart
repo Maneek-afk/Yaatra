@@ -1,5 +1,5 @@
 import 'package:bus/pages/Home_page.dart';
-import 'package:bus/pages/LoginPage.dart';
+import 'package:bus/pages/SignUp.dart';
 import 'package:bus/pages/Signinpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

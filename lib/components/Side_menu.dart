@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +12,51 @@ class SideMenu extends StatefulWidget {
   State<SideMenu> createState() => _SideMenuState();
 }
 
+ 
+
 class _SideMenuState extends State<SideMenu> {
+  String username = "";
+
+@override
+void initState() {
+  super.initState();
+  getUserEmail();
+}
+
+void getUserEmail() {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    String email = user.email ?? "";
+    getUsernameByEmail(email);
+  } else {
+    print("No user logged in.");
+  }
+}
+
+Future<void> getUsernameByEmail(String email) async {
+  try {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('user')
+        .where('email', isEqualTo: email)
+        .limit(1)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      String username = querySnapshot.docs.first['username'];
+      setState(() {
+        this.username = username; // Update the username variable
+      });
+      print("Username for email $email: $username");
+    } else {
+      print("No user found with email $email.");
+    }
+  } catch (e) {
+    print("Error getting username: $e");
+  }
+}
+
+
+  
   @override
   Widget build(BuildContext context) {
     return  Drawer(
@@ -25,7 +70,7 @@ class _SideMenuState extends State<SideMenu> {
             children: [
               const SizedBox(height: 20,),
               //top layer
-               const InfoCard(name: 'Test User',
+                InfoCard(name: username,
               ),
                const SizedBox(height: 10,),
               const Padding(

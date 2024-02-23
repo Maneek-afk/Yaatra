@@ -1,3 +1,4 @@
+import 'package:bus/components/BookedTicket.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,6 +49,8 @@ class _BookingPageState extends State<BookingPage> {
     passengerController.dispose();
     super.dispose();
   }
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -137,19 +140,22 @@ class _BookingPageState extends State<BookingPage> {
                 ),
               ),
         
-               ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, 'notification');
-          bookingDetail(
-            widget.cityName, 
-            toController.text.trim(), 
-            departureController.text.trim(), 
-            int.parse(passengerController.text.trim())
-          );
+         ElevatedButton(
+  onPressed: () async {
+    // Call the bookingDetail method
+    bookingDetail(
+      fromController.text.trim(),
+      toController.text.trim(),
+      departureController.text.trim(),
+      int.parse(passengerController.text.trim()),
+    );
 
-        },
-        child: const Text('Book'),
-            ),
+    // Navigate to the NotifiPage
+   Navigator.pushNamed(context, 'notification');
+  },
+  child: const Text('Book'),
+),
+
         
             ],
           ),
