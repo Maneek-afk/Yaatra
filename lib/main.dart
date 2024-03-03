@@ -1,5 +1,5 @@
 import 'package:bus/classes/Auth.dart';
-import 'package:bus/classes/Colors.dart';
+
 import 'package:bus/pages/AboutusPage.dart';
 import 'package:bus/pages/HelpPage.dart';
 import 'package:bus/pages/Home_page.dart';

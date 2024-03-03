@@ -1,8 +1,5 @@
 import 'package:bus/components/Textfield.dart';
-import 'package:bus/pages/Home_page.dart';
-import 'package:bus/pages/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:bus/classes/Colors.dart';
 
