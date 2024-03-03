@@ -46,19 +46,19 @@ class _HomePageState extends State<HomePage> {
           ),
 
            SliverToBoxAdapter(
-            child: Scrollables(imageAsset: 'lib/images/pokhara.jpg',cityName: 'Pokhara2',)
+            child: Scrollables(imageAsset: 'lib/images/chitwan.jpg',cityName: 'Chitwan',)
           ),
 
            SliverToBoxAdapter(
-            child: Scrollables(imageAsset: 'lib/images/pokhara.jpg',cityName: 'Pokhara3',)
+            child: Scrollables(imageAsset: 'lib/images/Ilam_a.jpg',cityName: 'Illam',)
           ),
 
            SliverToBoxAdapter(
-            child: Scrollables(imageAsset: 'lib/images/pokhara.jpg',cityName: 'Pokhara4',)
+            child: Scrollables(imageAsset: 'lib/images/mustang.jpg',cityName: 'Mustang',)
           ),
 
            SliverToBoxAdapter(
-            child: Scrollables(imageAsset: 'lib/images/pokhara.jpg',cityName: 'Pokhara5',)
+            child: Scrollables(imageAsset: 'lib/images/janakpur.jpg',cityName: 'Janakpur',)
           ),
 
 
